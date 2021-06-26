@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const researcherSchema = new mongoose.Schema({
+const presenterSchema = new mongoose.Schema({
     title: { type: String, required: true, trim: true },
     name: { type: String, required: true, trim: true },
     userName: { type: String, required: true, trim: true, unique: true },
@@ -11,6 +11,6 @@ const researcherSchema = new mongoose.Schema({
     department: { type: String, required: true, trim: true }
 })
 
-const Researcher = mongoose.model('Researcher', researcherSchema);
+const Presenter = mongoose.model('Presenter', presenterSchema);
 
-module.exports = Researcher;
+module.exports = Presenter;
