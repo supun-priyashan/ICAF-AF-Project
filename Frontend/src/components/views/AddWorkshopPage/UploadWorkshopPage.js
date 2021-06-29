@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Typography, Button, Form, message, Input, Icon } from 'antd';
-import FileUpload from '../../utils/FileUpload'
 import Axios from 'axios';
 
 const { Title } = Typography;
@@ -20,11 +19,16 @@ function UploadWorkshopPage(props) {
 
     const [TitleValue, setTitleValue] = useState("")
     const [DescriptionValue, setDescriptionValue] = useState("")
-    const [PriceValue, setPriceValue] = useState(0)
-    const [ContinentValue, setContinentValue] = useState(1)
 
-    const [Images, setImages] = useState([])
+    const [selectedFile, setSelectedFile] = useState();
+    const [isFilePicked, setIsFilePicked] = useState(false);
 
+    const fileChangeHandler = (event) => {
+
+        setSelectedFile(event.target.files[0]);
+        setIsFilePicked(true);
+
+    };
 
     const onTitleChange = (event) => {
         setTitleValue(event.currentTarget.value)
@@ -34,33 +38,19 @@ function UploadWorkshopPage(props) {
         setDescriptionValue(event.currentTarget.value)
     }
 
-    const onPriceChange = (event) => {
-        setPriceValue(event.currentTarget.value)
-    }
-
-    const onContinentsSelectChange = (event) => {
-        setContinentValue(event.currentTarget.value)
-    }
-
-    const updateImages = (newImages) => {
-        setImages(newImages)
-    }
     const onSubmit = (event) => {
         event.preventDefault();
 
 
-        if (!TitleValue || !DescriptionValue || !PriceValue ||
-            !ContinentValue || !Images) {
+        if (!TitleValue || !DescriptionValue || isFilePicked) {
             return alert('fill all the fields first!')
         }
 
         const variables = {
-            writer: props.user.userData._id,
-            title: TitleValue,
+            presenter: props.user.userData._id,
+            topic: TitleValue,
             description: DescriptionValue,
-            price: PriceValue,
-            images: Images,
-            continents: ContinentValue,
+            proposal: selectedFile
         }
 
         Axios.post('/api/product/uploadProduct', variables)
@@ -78,14 +68,17 @@ function UploadWorkshopPage(props) {
     return (
         <div style={{ maxWidth: '700px', margin: '2rem auto' }}>
             <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-                <Title level={2}> Upload Product</Title>
+                <Title level={2}> Add Workshop</Title>
             </div>
 
             <Form onSubmit={onSubmit} >
 
-                {/* DropZone */}
-                <FileUpload refreshFunction={updateImages} />
-
+                <label>Add workshop proposal</label>
+                <Input
+                    type={"file"}
+                    name="file"
+                    onChange={fileChangeHandler}
+                />
                 <br />
                 <br />
                 <label>Title</label>

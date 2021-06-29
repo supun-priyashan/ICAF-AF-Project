@@ -8,6 +8,7 @@ import NavBar from "./views/NavBar/NavBar";
 import Footer from "./views/Footer/Footer"
 import CardPaymentPage from "./views/PaymentPage/CardPaymentPage";
 import MobilePaymentPage from "./views/PaymentPage/MobilePaymentPage";
+import UploadWorkshopPage from "./views/AddWorkshopPage/UploadWorkshopPage";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route exact path="/" component={LandingPage} />
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/register" component={RegisterPage} />
+          <Route exact path="/uploadWorkshop" component={UploadWorkshopPage} />
           <Route exact path="/cardPayment" component={CardPaymentPage} />
           <Route exact path="/mobilePayment" component={MobilePaymentPage} />
         </Switch>
