@@ -5,10 +5,10 @@ import Axios from 'axios';
 const { Title } = Typography;
 const { TextArea } = Input;
 
-function UploadWorkshopPage(props) {
+function UploadPaperPage(props) {
 
-    const [TitleValue, setTitleValue] = useState("")
-    const [DescriptionValue, setDescriptionValue] = useState("")
+    const [TitleValue, setTitleValue] = useState("");
+    const [DescriptionValue, setDescriptionValue] = useState("");
 
     const [selectedFile, setSelectedFile] = useState();
     const [isFilePicked, setIsFilePicked] = useState(false);
@@ -58,12 +58,12 @@ function UploadWorkshopPage(props) {
     return (
         <div style={{ maxWidth: '700px', margin: '2rem auto' }}>
             <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-                <Title level={2}> Add Workshop</Title>
+                <Title level={2}> Add Research Paper </Title>
             </div>
 
             <Form onSubmit={onSubmit} >
 
-                <label>Add workshop proposal</label>
+                <label>Add proposal</label>
                 <Input
                     type={"file"}
                     name="file"
@@ -98,4 +98,4 @@ function UploadWorkshopPage(props) {
     )
 }
 
-export default UploadWorkshopPage
+export default UploadPaperPage;
