@@ -2,6 +2,8 @@ import React, {useState} from "react";
 import {Radio } from "antd";
 import { useDispatch } from "react-redux";
 import ResearcherReg from "./Sections/ResearcherReg";
+import PresenterReg from "./Sections/PresenterReg"
+import AttendeeReg from "./Sections/AttendeeReg"
 
 function RegisterPage(props) {
 
@@ -36,13 +38,13 @@ function RegisterPage(props) {
                 : null }
             { regType=="1"  ?
                 <>
-                    222222
+                    <PresenterReg/>
                 </>
 
                 : null }
             { regType=="2"  ?
                 <>
-                    222222
+                    <AttendeeReg/>
                 </>
 
                 : null }
