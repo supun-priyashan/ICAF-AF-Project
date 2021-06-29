@@ -98,13 +98,13 @@ function RegisterPage(props) {
 
                     console.log(dataToSubmit);
 
-                    /*dispatch(registerUser(dataToSubmit)).then(response => {
+                    dispatch(registerUser(dataToSubmit)).then(response => {
                         if (response.payload.success) {
                             props.history.push("/login");
                         } else {
                             alert(response.payload.err.errmsg)
                         }
-                    })*/
+                    })
 
                     setSubmitting(false);
                 }, 500);

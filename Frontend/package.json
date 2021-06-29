@@ -1,0 +1,55 @@
+{
+  "name": "frontend",
+  "version": "0.1.0",
+  "description": "Frontend of the ICAF application",
+  "private": true,
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@ant-design/icons": "^4.6.2",
+    "parcel": "^2.0.0-nightly.734"
+  },
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^11.2.7",
+    "@testing-library/user-event": "^12.8.3",
+    "antd": "^3.26.20",
+    "axios": "^0.21.1",
+    "formik": "^1.5.8",
+    "moment": "^2.29.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-dropzone": "^10.2.2",
+    "react-icons": "^3.11.0",
+    "react-image-gallery": "^1.1.1",
+    "react-paypal-express-checkout": "^1.0.5",
+    "react-phone-number-input": "^3.1.22",
+    "react-redux": "^7.2.4",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "4.0.3",
+    "react-select": "^4.3.1",
+    "redux": "^4.1.0",
+    "redux-form": "^8.3.7",
+    "redux-promise": "^0.6.0",
+    "redux-thunk": "^2.3.0",
+    "yup": "^0.27.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
