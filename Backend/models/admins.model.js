@@ -11,4 +11,4 @@ const Admin = mongoose.model('Admin', adminSchema);
 
 module.exports = Admin;
 
-//admin model- Shakey
+//admin model - Shakey
