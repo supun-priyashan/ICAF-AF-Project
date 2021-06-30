@@ -7,6 +7,9 @@ const bodyParser = require('body-parser');
 const conferenceRoute = require('./routes/conference.route');
 const userRoute = require('./routes/user.route');
 const downloadRoute = require('./routes/downloads.route');
+const workshopRoute = require('./routes/workshops.route');
+const paperRoute = require('./routes/paper.route');
+const paymentRoute = require('./routes/payment.route');
 
 dotenv.config();
 const app = express();
@@ -38,6 +41,9 @@ app.route('/').get((req,res) => {
 app.use('/conference', conferenceRoute());
 app.use('/user', userRoute());
 app.use('/download', downloadRoute());
+app.use('/workshop', workshopRoute());
+app.use('/paper', paperRoute());
+app.use('/payment', paymentRoute());
 
 app.listen(PORT,()=>{
     console.log(`Server is up and running on port ${PORT}`);
