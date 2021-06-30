@@ -1,6 +1,5 @@
 import React, { Suspense } from 'react';
 import { Route, Switch } from "react-router-dom";
-
 import LandingPage from "./views/LandingPage/LandingPage.js";
 import LoginPage from "./views/LoginPage/LoginPage.js";
 import RegisterPage from "./views/RegisterPage/RegisterPage.js";

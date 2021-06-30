@@ -1,9 +1,4 @@
-import React from 'react'
-import { useState, useEffect } from 'react'
-import {Icon} from 'antd';
-
-
-function LandingPage(props) {
+export const Carousel = (props) => {
     return (
         <header id='header'>
             <div className='intro'>
@@ -28,9 +23,5 @@ function LandingPage(props) {
                 </div>
             </div>
         </header>
-
-        )
-
+    )
 }
-
-export default LandingPage
