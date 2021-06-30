@@ -8,7 +8,8 @@ const presenterSchema = new mongoose.Schema({
     email: { type: String, required: true, unique: true },
     contactNumber: { type: String, required: true, trim: true },
     university: { type: String, required: true, trim: true },
-    department: { type: String, required: true, trim: true }
+    department: { type: String, required: true, trim: true },
+    isPresenter: { type: Boolean, required:true, default: false}
 })
 
 const Presenter = mongoose.model('Presenter', presenterSchema);

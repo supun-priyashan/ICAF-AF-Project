@@ -5,10 +5,10 @@ import Axios from 'axios';
 const { Title } = Typography;
 const { TextArea } = Input;
 
-function UploadWorkshopPage(props) {
+function UploadPaperPage(props) {
 
-    const [TitleValue, setTitleValue] = useState("")
-    const [DescriptionValue, setDescriptionValue] = useState("")
+    const [TitleValue, setTitleValue] = useState("");
+    const [DescriptionValue, setDescriptionValue] = useState("");
 
     const [selectedFile, setSelectedFile] = useState();
     const [isFilePicked, setIsFilePicked] = useState(false);
@@ -31,16 +31,17 @@ function UploadWorkshopPage(props) {
     const onSubmit = (event) => {
         event.preventDefault();
 
-
         if (!TitleValue || !DescriptionValue || isFilePicked) {
             return alert('fill all the fields first!')
         }
 
         const variables = {
-            presenter: props.user.userData._id,
             topic: TitleValue,
             description: DescriptionValue,
-            proposal: selectedFile
+            link: selectedFile,
+            author: props.user.userData._id,
+            isApproved: false,
+            isPaid: false
         }
 
         Axios.post('/api/product/uploadProduct', variables)
@@ -58,12 +59,12 @@ function UploadWorkshopPage(props) {
     return (
         <div style={{ maxWidth: '700px', margin: '2rem auto' }}>
             <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-                <Title level={2}> Add Workshop</Title>
+                <Title level={2}> Add Research Paper </Title>
             </div>
 
             <Form onSubmit={onSubmit} >
 
-                <label>Add workshop proposal</label>
+                <label>Add Research Paper</label>
                 <Input
                     type={"file"}
                     name="file"
@@ -71,7 +72,7 @@ function UploadWorkshopPage(props) {
                 />
                 <br />
                 <br />
-                <label>Workshop Title</label>
+                <label>Paper Title</label>
                 <Input
                     onChange={onTitleChange}
                     value={TitleValue}
@@ -98,4 +99,4 @@ function UploadWorkshopPage(props) {
     )
 }
 
-export default UploadWorkshopPage
+export default UploadPaperPage;
