@@ -17,6 +17,17 @@ h2 {
 	font-size: 36px;
 	color: #333;
 }
+.headertop{
+	font-family: 'Raleway', sans-serif;
+	color: #fff;
+	font-size: 50px;
+	font-weight: 700;
+	text-transform: uppercase;
+	margin-top: 0;
+	margin-bottom: 0;
+	font-weight: 800;
+	color: #ffffff;
+}
 h3 {
 	font-size: 20px;
 	font-weight: 600;
