@@ -5,6 +5,8 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 
 const conferenceRoute = require('./routes/conference.route');
+const userRoute = require('./routes/user.route');
+const downloadRoute = require('./routes/downloads.route');
 
 dotenv.config();
 const app = express();
@@ -34,6 +36,8 @@ app.route('/').get((req,res) => {
 })
 
 app.use('/conference', conferenceRoute());
+app.use('/user', userRoute());
+app.use('/download', downloadRoute());
 
 app.listen(PORT,()=>{
     console.log(`Server is up and running on port ${PORT}`);

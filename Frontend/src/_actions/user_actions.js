@@ -6,11 +6,14 @@ import {
     LOGOUT_USER
 } from './types';
 
-const USER_SERVER = 'api/users';
+const USER_SERVER = 'http://localhost:8080/user/';
 
 export function registerUser(dataToSubmit) {
-    const request = axios.post(`${USER_SERVER}/register`, dataToSubmit)
-        .then(response => response.data);
+    const request = axios.post(`${USER_SERVER}/`, dataToSubmit)
+        .then(response => response.data).
+        catch(err => {
+            console.log(err);
+        });
 
     return {
         type: REGISTER_USER,
@@ -19,8 +22,10 @@ export function registerUser(dataToSubmit) {
 }
 
 export function loginUser(dataToSubmit) {
-    const request = axios.post(`${USER_SERVER}/login`, dataToSubmit)
-        .then(response => response.data);
+    const request = axios.get(`${USER_SERVER}/`, dataToSubmit)
+        .then(response => response.data).catch(err => {
+            console.log(err);
+        });
 
     return {
         type: LOGIN_USER,

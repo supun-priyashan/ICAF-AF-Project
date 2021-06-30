@@ -9,4 +9,19 @@ const getDownloads = async (request, response) => {
     }
 };
 
-module.exports = { getDownloads };
+const addDownload = async (request, response) => {
+    const download = new Download(request.body);
+
+    await Download.save().
+    then((data) => {
+        response.status(200).send({Download: data}).
+        catch((err) => {
+            response.status(500).send({error: err.message});
+        });
+    })
+}
+
+module.exports = {
+    getDownloads,
+    addDownload
+};

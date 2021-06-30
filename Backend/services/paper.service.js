@@ -1,9 +1,9 @@
 const Paper = require('../models/paper.model')
 
 const addPaper = async (request, response) => {
-    const Paper = new Paper(request.body);
+    const paper = new Paper(request.body);
 
-    await Paper.save().
+    await paper.save().
     then((data) => {
         response.status(200).send({Paper: data}).
         catch((err) => {
@@ -12,6 +12,16 @@ const addPaper = async (request, response) => {
     })
 }
 
+const getPapers = async (request, response) => {
+    try {
+        const papers = await Paper.find();
+        response.status(200).json({ papers: papers });
+    } catch (error) {
+        response.status(404).json({ error: error.message });
+    }
+};
+
 module.exports = {
-    addPaper
+    addPaper,
+    getPapers
 };
