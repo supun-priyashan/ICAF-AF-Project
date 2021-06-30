@@ -22,7 +22,20 @@ const addConference = async (request, response) => {
     })
 }
 
+const putConference = async (request, response) => {
+    const conf = new Conference(request.body);
+
+    await conf.save().
+    then((data) => {
+        response.status(200).send({conference: data}).
+        catch((err) => {
+            response.status(500).send({error: err.message});
+        });
+    })
+}
+
 module.exports = {
     getConference,
-    addConference
+    addConference,
+    putConference
 };
