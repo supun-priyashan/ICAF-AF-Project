@@ -31,16 +31,17 @@ function UploadPaperPage(props) {
     const onSubmit = (event) => {
         event.preventDefault();
 
-
         if (!TitleValue || !DescriptionValue || isFilePicked) {
             return alert('fill all the fields first!')
         }
 
         const variables = {
-            presenter: props.user.userData._id,
             topic: TitleValue,
             description: DescriptionValue,
-            proposal: selectedFile
+            link: selectedFile,
+            author: props.user.userData._id,
+            isApproved: false,
+            isPaid: false
         }
 
         Axios.post('/api/product/uploadProduct', variables)
@@ -63,7 +64,7 @@ function UploadPaperPage(props) {
 
             <Form onSubmit={onSubmit} >
 
-                <label>Add proposal</label>
+                <label>Add Research Paper</label>
                 <Input
                     type={"file"}
                     name="file"
@@ -71,7 +72,7 @@ function UploadPaperPage(props) {
                 />
                 <br />
                 <br />
-                <label>Title</label>
+                <label>Paper Title</label>
                 <Input
                     onChange={onTitleChange}
                     value={TitleValue}

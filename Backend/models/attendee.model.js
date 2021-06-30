@@ -9,6 +9,7 @@ const AttendeeSchema = new mongoose.Schema({
     email: { type: String, required: true, unique: true },
     contactNumber: { type: String, required: true, trim: true },
     isPaid: { type: Boolean, required: true, default: false },
+    isAttendee: { type: Boolean, required:true, default: false}
 });
 
 const Attendee = mongoose.model("attendees", AttendeeSchema);

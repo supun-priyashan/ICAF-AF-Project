@@ -71,7 +71,7 @@ function UploadWorkshopPage(props) {
                 />
                 <br />
                 <br />
-                <label>Title</label>
+                <label>Workshop Title</label>
                 <Input
                     onChange={onTitleChange}
                     value={TitleValue}
