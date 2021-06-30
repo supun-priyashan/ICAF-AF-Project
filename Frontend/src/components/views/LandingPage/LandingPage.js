@@ -1,7 +1,4 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
-import {Icon} from 'antd';
-
 
 function LandingPage(props) {
     return (

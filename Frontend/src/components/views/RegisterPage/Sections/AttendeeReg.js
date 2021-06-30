@@ -1,10 +1,10 @@
 import React, {useState} from "react";
-import moment from "moment";
 import { Formik } from 'formik';
 import Select from 'react-select';
 import * as Yup from 'yup';
 import { registerUser } from "../../../../_actions/user_actions";
 import { useDispatch } from "react-redux";
+import axios from "axios";
 
 import {
     Form,
@@ -53,7 +53,7 @@ function RegisterPage(props) {
             initialValues={{
                 title: '',
                 name: '',
-                userName: '',
+                username: '',
                 password: '',
                 email: '',
                 contactNumber: '',
@@ -83,22 +83,30 @@ function RegisterPage(props) {
                     let dataToSubmit = {
                         email: values.email,
                         password: values.password,
-                        confirmPassword: '',
                         name: values.name,
                         title: title.value,
-                        userName: values.userName,
+                        username: values.userName,
                         contactNumber: values.contactNumber,
+                        isPaid: false,
+                        isAttendee: true
                     };
 
                     console.log(dataToSubmit);
 
-                    dispatch(registerUser(dataToSubmit)).then(response => {
+                    axios.post('http://localhost:8080/user',dataToSubmit).then((response) => {
+                        console.log(response.data);
+                        props.history.push("/login");
+                    }).catch((err) => {
+                        console.log(err.message);
+                    })
+
+                    /*dispatch(registerUser(dataToSubmit)).then(response => {
                         if (response.payload.success) {
                             props.history.push("/login");
                         } else {
                             alert(response.payload.err.errmsg)
                         }
-                    })
+                    })*/
 
                     setSubmitting(false);
                 }, 500);

@@ -80,7 +80,8 @@ const createUser = async (req, res) => {
 }
 
 const login = async (req, res) => {
-    await Admin.findOne(`{ username: req.body.username }`).then((data) => {
+    console.log(req.body);
+    await Admin.findOne({ username: req.body.username }).then((data) => {
         if(req.body.password === data.password){
             res.status(200).send({
                 success: true,
@@ -145,4 +146,10 @@ const login = async (req, res) => {
            })
        })
     })
+}
+
+module.exports = {
+    login,
+    createUser,
+    createAdmins
 }
