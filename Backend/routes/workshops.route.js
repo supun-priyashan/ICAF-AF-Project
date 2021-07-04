@@ -5,8 +5,9 @@ const workshopService = require('../services/workshops.service');
 
 module.exports = function(){
     router.post('/', workshopService.addWorkshop);
+    router.post('/uploadFile', workshopService.uploadFile);
+    router.put('/', workshopService.approveWorkshop);
     router.get('/', workshopService.getWorkshops);
-    router.put('/',workshopService.putWorkshops);
 
     return router;
 }

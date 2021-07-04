@@ -7,7 +7,10 @@ const addPayment = async( req,res ) => {
     })
     try{
         await payment.save()
-        res.status(201).json({message:"payment is successful"})
+        res.status(201).json({
+            message:"payment is successful",
+            success: true
+        })
     }catch(err){
         res.status(400).json({message: err.message})
     }

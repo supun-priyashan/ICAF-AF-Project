@@ -4,7 +4,7 @@ import Axios from 'axios';
 
 const { Title } = Typography;
 
-function CardPaymentPage(props) {
+function PaymentPage(props) {
 
     const [CardNameValue, setTitleValue] = useState("")
     const [CardNumberValue, setCardNumberValue] = useState("")
@@ -51,17 +51,13 @@ function CardPaymentPage(props) {
         }
 
         const variables = {
-            writer: props.user.userData._id,
-            title: CardNameValue,
-            description: CardNumberValue,
-            price: ExpDateValue,
-            cvv:CVVValue,
-            zip:ZIPValue,
-            email:EmailValue,
-            telno:TelNoValue
+            name: localStorage.getItem('username'),
+            price: 200,
+            type: "Attendee Fee",
+            date: new Date().toLocaleString()
         }
 
-        Axios.post('/api/payment/cardPayment', variables)
+        Axios.post('http://localhost:8080/payment', variables)
             .then(response => {
                 if (response.data.success) {
                     alert('Payment Successful')
@@ -75,7 +71,7 @@ function CardPaymentPage(props) {
     return (
         <div style={{ maxWidth: '700px', margin: '2rem auto' }}>
             <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-                <Title level={2}> Card Details <Icon type="credit-card"/></Title>
+                <Title level={2}> Payment Details <Icon type="credit-card"/></Title>
             </div>
 
 
@@ -151,4 +147,4 @@ function CardPaymentPage(props) {
     )
 }
 
-export default CardPaymentPage
+export default PaymentPage

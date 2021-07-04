@@ -63,19 +63,28 @@ const createUser = async (req, res) => {
     if(user && user.isResearcher){
         const researcher = new Researcher(user);
 
-        await researcher.save().then((data) => res.status(200).send(data)).
-            catch((err) => res.status(500).send(err.message))
+        await researcher.save().then((data) => res.status(200).
+        send({
+            success:true,
+            user: data
+        })).catch((err) => res.status(500).send(err.message))
 
     }else if(user && user.isPresenter){
         const presenter = new Presenter(user);
 
-        await presenter.save().then((data) => res.status(200).send(data)).
-            catch((err) => res.status(500).send(err.message))
+        await presenter.save().then((data) => res.status(200).
+        send({
+            success:true,
+            user:data
+        })).catch((err) => res.status(500).send(err.message))
     }else{
         const attendee = new Attendee(user);
 
-        await attendee.save().then((data) => res.status(200).send(data)).
-            catch((err) => res.status(500).send(err.message))
+        await attendee.save().then((data) => res.status(200).
+        send({
+            success:true,
+            user:data
+        })).catch((err) => res.status(500).send(err.message))
     }
 }
 

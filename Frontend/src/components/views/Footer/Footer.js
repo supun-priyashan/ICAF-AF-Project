@@ -8,7 +8,7 @@ function Footer() {
             flexDirection: 'column', alignItems: 'center',
             justifyContent: 'center', fontSize:'1rem'
         }}>
-           <p> Placeholder..<Icon type="smile" /></p>
+           <p> © 2021 ICAC - All right reserved{/*<Icon type="smile" />*/}</p>
         </div>
     )
 }

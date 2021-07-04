@@ -1,36 +1,40 @@
 import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
-import { loginUser } from "../../../_actions/user_actions";
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { Form, Icon, Input, Button, Checkbox, Typography } from 'antd';
-import { useDispatch } from "react-redux";
+import axios from "axios";
 
 const { Title } = Typography;
 
 function LoginPage(props) {
-  const dispatch = useDispatch();
-  const rememberMeChecked = localStorage.getItem("rememberMe") ? true : false;
+  const rememberMeChecked = localStorage.getItem("rememberMe");
 
   const [formErrorMessage, setFormErrorMessage] = useState('')
   const [rememberMe, setRememberMe] = useState(rememberMeChecked)
 
   const handleRememberMe = () => {
-    setRememberMe(!rememberMe)
+    let remember = "false";
+    if(rememberMe)
+      remember = "true";
+
+    setRememberMe(remember);
   };
 
-  const initialEmail = localStorage.getItem("rememberMe") ? localStorage.getItem("rememberMe") : '';
+  let initialUname = null;
+
+  if(rememberMe === "true")
+    initialUname = localStorage.getItem('username');
 
   return (
     <Formik
       initialValues={{
-        email: initialEmail,
+        username: initialUname,
         password: '',
       }}
       validationSchema={Yup.object().shape({
-        email: Yup.string()
-          .email('Email is invalid')
-          .required('Email is required'),
+        username: Yup.string()
+          .required('Username is required'),
         password: Yup.string()
           .min(6, 'Password must be at least 6 characters')
           .required('Password is required'),
@@ -38,16 +42,31 @@ function LoginPage(props) {
       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
           let dataToSubmit = {
-            email: values.email,
+            username: values.username,
             password: values.password
           };
 
-          dispatch(loginUser(dataToSubmit))
+          axios.post('http://localhost:8080/user/login',dataToSubmit)
             .then(response => {
-              if (response.payload.loginSuccess) {
-                window.localStorage.setItem('userId', response.payload.userId);
+              if (response.data.success) {
+                localStorage.setItem('userid', response.data.user._id);
+                localStorage.setItem('username', response.data.user.username);
+                if(response.data.user.isAdmin)
+                  localStorage.setItem('userType', "admin");
+                else if(response.data.user.isReviewer)
+                  localStorage.setItem('userType', "reviewer");
+                else if(response.data.user.isEditor)
+                  localStorage.setItem('userType', "editor");
+                else if(response.data.user.isAttendee)
+                  localStorage.setItem('userType', "attendee");
+                else if(response.data.user.isPaid)
+                  localStorage.setItem('attendeePaid', "paid");
+                else if(response.data.user.isPresenter)
+                  localStorage.setItem('userType', "presenter");
+                else if(response.data.user.isResearcher)
+                localStorage.setItem('userType', "researcher");
                 if (rememberMe === true) {
-                  window.localStorage.setItem('rememberMe', values.id);
+                  localStorage.setItem('rememberMe', "true");
                 } else {
                   localStorage.removeItem('rememberMe');
                 }
@@ -86,19 +105,19 @@ function LoginPage(props) {
 
               <Form.Item required>
                 <Input
-                  id="email"
+                  id="username"
                   prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                  placeholder="Enter your email"
-                  type="email"
-                  value={values.email}
+                  placeholder="Enter your username"
+                  type="text"
+                  value={values.username}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   className={
-                    errors.email && touched.email ? 'text-input error' : 'text-input'
+                    errors.username && touched.username ? 'text-input error' : 'text-input'
                   }
                 />
-                {errors.email && touched.email && (
-                  <div className="input-feedback">{errors.email}</div>
+                {errors.username && touched.username && (
+                  <div className="input-feedback">{errors.username}</div>
                 )}
               </Form.Item>
 
@@ -144,6 +163,6 @@ function LoginPage(props) {
   );
 };
 
-export default LoginPage;
+export default withRouter(LoginPage);
 
 

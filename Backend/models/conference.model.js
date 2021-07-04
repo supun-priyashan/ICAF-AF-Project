@@ -6,8 +6,9 @@ const ConferenceSchema = new mongoose.Schema({
     venue: { type: String, required: true, trim: true },
     startDate: { type: Date, required: true },
     endDate: { type: Date, required: true },
-    mail: {type: String, required:true}
-});
+    mail: {type: String, required:true},
+    isApproved: {type:Boolean, default: false},
+},{ timestamps: { createdAt: 'created_at' } });
 
 const Conference = mongoose.model("conference", ConferenceSchema);
 

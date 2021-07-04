@@ -2,8 +2,7 @@ import React, {useState} from "react";
 import { Formik } from 'formik';
 import Select from 'react-select';
 import * as Yup from 'yup';
-import { registerUser } from "../../../../_actions/user_actions";
-import { useDispatch } from "react-redux";
+import { withRouter } from 'react-router';
 import axios from "axios";
 
 import {
@@ -42,9 +41,7 @@ const options = [
     { value: 'Prof', label: 'Prof' }
 ]
 
-function RegisterPage(props) {
-    const dispatch = useDispatch();
-
+function AttendeeReg(props) {
     const [title,setTitle] = useState('');
 
     return (
@@ -52,12 +49,12 @@ function RegisterPage(props) {
         <Formik
             initialValues={{
                 title: '',
-                name: '',
-                username: '',
-                password: '',
                 email: '',
-                contactNumber: '',
-
+                userName: '',
+                name: '',
+                password: '',
+                confirmPassword: '',
+                contactno: ''
             }}
             validationSchema={Yup.object().shape({
                 name: Yup.string()
@@ -73,10 +70,9 @@ function RegisterPage(props) {
                 confirmPassword: Yup.string()
                     .oneOf([Yup.ref('password'), null], 'Passwords must match')
                     .required('Confirm Password is required'),
-                contact: Yup.string()
-                    .required('Contact number is required'),
+                contactno: Yup.string()
+                    .required('Contact number is required')
             })}
-
             onSubmit={(values, { setSubmitting }) => {
                 setTimeout(() => {
 
@@ -86,27 +82,27 @@ function RegisterPage(props) {
                         name: values.name,
                         title: title.value,
                         username: values.userName,
-                        contactNumber: values.contactNumber,
-                        isPaid: false,
-                        isAttendee: true
+                        contactNumber: values.contactno,
+                        isAttendee: true,
+                        isPaid: false
                     };
 
                     console.log(dataToSubmit);
 
-                    axios.post('http://localhost:8080/user',dataToSubmit).then((response) => {
-                        console.log(response.data);
-                        props.history.push("/login");
-                    }).catch((err) => {
-                        console.log(err.message);
-                    })
-
-                    /*dispatch(registerUser(dataToSubmit)).then(response => {
-                        if (response.payload.success) {
-                            props.history.push("/login");
-                        } else {
-                            alert(response.payload.err.errmsg)
-                        }
-                    })*/
+                    axios.post('http://localhost:8080/user/', dataToSubmit)
+                        .then(response =>
+                        {
+                            if( response.data.success){
+                                console.log(props);
+                                props.history.push("/login");
+                                alert('success');
+                            }else{
+                                alert("Error while registering user");
+                            }
+                        }).
+                    catch(err => {
+                        console.log(err);
+                    });
 
                     setSubmitting(false);
                 }, 500);
@@ -117,7 +113,6 @@ function RegisterPage(props) {
                     values,
                     touched,
                     errors,
-                    dirty,
                     isSubmitting,
                     handleChange,
                     handleBlur,
@@ -127,7 +122,7 @@ function RegisterPage(props) {
                 return (
                     <div className="container">
                         <br/>
-                        {/*<h2>Attendee Sign up</h2>*/}
+                        {/*<h2>Researcher Sign up</h2>*/}
                         <Form style={{ minWidth: '375px' }} {...formItemLayout} onSubmit={handleSubmit} >
 
                             <Form.Item required label="Title">
@@ -168,7 +163,7 @@ function RegisterPage(props) {
                             <Form.Item required label="Username">
                                 <Input
                                     id="userName"
-                                    placeholder="Enter your Last Name"
+                                    placeholder="Enter your Username"
                                     type="text"
                                     value={values.userName}
                                     onChange={handleChange}
@@ -219,7 +214,7 @@ function RegisterPage(props) {
                             <Form.Item required label="Confirm Password" hasFeedback>
                                 <Input
                                     id="confirmPassword"
-                                    placeholder="Enter your confirmPassword"
+                                    placeholder="Re-Enter your Password"
                                     type="password"
                                     value={values.confirmPassword}
                                     onChange={handleChange}
@@ -234,19 +229,19 @@ function RegisterPage(props) {
                             </Form.Item>
 
                             <Form.Item required label="Contact Number">
-                                <Input
-                                    id="contactNumber"
+                                {<Input
+                                    id="contactno"
                                     placeholder="Enter contact number"
                                     type="number"
-                                    value={values.contactNumber}
+                                    value={values.contactno}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     className={
-                                        errors.contactNumber && touched.contactNumber ? 'text-input error' : 'text-input'
+                                        errors.contactno && touched.contactno ? 'text-input error' : 'text-input'
                                     }
-                                />
-                                {errors.contactNumber && touched.contactNumber && (
-                                    <div className="input-feedback">{errors.contactNumber}</div>
+                                />}
+                                {errors.contactno && touched.contactno && (
+                                    <div className="input-feedback">{errors.contactno}</div>
                                 )}
                             </Form.Item>
 
@@ -263,4 +258,4 @@ function RegisterPage(props) {
     );
 };
 
-export default RegisterPage
+export default withRouter(AttendeeReg);
