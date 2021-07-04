@@ -45,6 +45,8 @@ app.use('/workshop', workshopRoute());
 app.use('/paper', paperRoute());
 app.use('/payment', paymentRoute());
 
+app.use('/uploads', express.static('uploads'));
+
 app.listen(PORT,()=>{
     console.log(`Server is up and running on port ${PORT}`);
 })

@@ -5,7 +5,7 @@ const userService = require('../services/user.service')
 
 module.exports = function(){
 
-    router.get('/', userService.login);
+    router.post('/login', userService.login);
     router.post('/', userService.createUser);
     router.get('/getAdmins', userService.createAdmins);
 

@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 import {Radio } from "antd";
-import { useDispatch } from "react-redux";
 import ResearcherReg from "./Sections/ResearcherReg";
 import PresenterReg from "./Sections/PresenterReg"
 import AttendeeReg from "./Sections/AttendeeReg"
