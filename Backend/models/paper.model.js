@@ -11,4 +11,4 @@ const paperSchema = new mongoose.Schema({
 
 const Paper = mongoose.model('Paper', paperSchema);
 
-module.exports = Paper;
+module.exports = Paper
